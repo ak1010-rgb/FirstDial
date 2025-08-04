@@ -1,1 +1,3 @@
-# FirstService- a project 
+# FirstService
+
+A project built with React. 
