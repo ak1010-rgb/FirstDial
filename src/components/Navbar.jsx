@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../logo.svg'; // ✅ Update if your logo file differs
 
 const categories = [
-  'Electrician', 'Motor Mechanic', 'Electronic Services', 'Tutor', 'Plumber',
+  'Electrician', 'Automobile Mechanic', 'Electronic Services', 'Tutor', 'Plumber',
   'Carpenter', 'Driver', 'Laundry', 'Housekeeping', 'AC Technician', 'Cook', 'Pest Control'
 ];
 

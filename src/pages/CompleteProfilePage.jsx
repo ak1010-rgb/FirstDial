@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const servicesList = [
   'Electrician', 'Plumber', 'Driver', 'Tutor', 'Cook', 'Housekeeping', 'Laundry',
-  'AC Technician', 'Carpenter', 'Pest Control', 'Motor Mechanic', 'Electronic Services'
+  'AC Technician', 'Carpenter', 'Pest Control', 'Automobile Mechanic', 'Electronic Services'
 ];
 
 const CompleteProfilePage = () => {

@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 const skilledServices = [
   { name: 'Electrician', icon: '💡' },
-  { name: 'Motor Mechanic', icon: '🛠️' },
+  { name: 'Automobile Mechanic', icon: '🛠️' },
   { name: 'Electronic Services', icon: '📺' },
   { name: 'Tutor', icon: '📚' },
   { name: 'AC Technician', icon: '❄️' },
@@ -24,12 +26,26 @@ const HomePage = () => {
   const bottomRef = useRef(null);
   const [showArrow, setShowArrow] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [providers, setProviders] = useState([]);
 
+  // ✅ Always fetch fresh providers from Firestore server
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    const fetchProviders = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'providers'), { source: 'server' });
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setProviders(data);
+      } catch (err) {
+        console.error("Error fetching providers:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProviders();
   }, []);
 
+  // Arrow toggle logic
   useEffect(() => {
     const target = bottomRef.current;
     if (!target) return;
@@ -46,7 +62,7 @@ const HomePage = () => {
   const getColor = (name) => {
     switch (name) {
       case 'Electrician': return 'bg-yellow-100 hover:bg-yellow-200 text-yellow-800';
-      case 'Motor Mechanic': return 'bg-red-100 hover:bg-red-200 text-red-800';
+      case 'Automobile Mechanic': return 'bg-red-100 hover:bg-red-200 text-red-800';
       case 'Electronic Services': return 'bg-purple-100 hover:bg-purple-200 text-purple-800';
       case 'Tutor': return 'bg-green-100 hover:bg-green-200 text-green-800';
       case 'Plumber': return 'bg-blue-100 hover:bg-blue-200 text-blue-800';
@@ -65,7 +81,7 @@ const HomePage = () => {
     services.map(({ name, icon }) => (
       <button
         key={name}
-        onClick={() => navigate(`/${name.toLowerCase().replace(/\s+/g, '-')}`)}
+        onClick={() => navigate(`/${name.toLowerCase().replace(/\s+/g, '-')}`, { state: { providers } })}
         className={`rounded-xl px-6 py-4 w-full font-semibold text-lg shadow-md border border-gray-200 transition-all duration-200 flex items-center justify-center gap-2 ${getColor(name)}`}
       >
         <span className="text-xl">{icon}</span> {name}
@@ -86,8 +102,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen py-10 px-4 relative" style={{ backgroundColor: '#BFFFED' }}>
-      
-      {/* 👇 Floating Scroll Hint Near Bottom */}
       {showArrow && (
         <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce z-40 text-center">
           <div className="text-gray-700 text-sm font-medium">More</div>
@@ -117,7 +131,6 @@ const HomePage = () => {
         <div ref={bottomRef} className="h-1" />
       </div>
 
-      {/* ➕ Add Service Button */}
       <button
         onClick={() => navigate('/login')}
         className="fixed bottom-6 right-6 bg-blue-600 text-white px-5 py-3 rounded-full shadow-lg text-lg hover:bg-blue-700 transition duration-200"

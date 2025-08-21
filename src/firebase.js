@@ -1,8 +1,10 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore"; // ✅ if using Firestore
+import { getFirestore } from "firebase/firestore";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
+// ✅ Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAwXirRSL77oXducINVYVb31KJq8OiF_xw",
   authDomain: "firstdial-4a62a.firebaseapp.com",
@@ -13,8 +15,16 @@ const firebaseConfig = {
   measurementId: "G-01ERY42G4E"
 };
 
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// ✅ Export in correct order
+// ✅ Auth & Firestore
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// ✅ App Check with reCAPTCHA v3
+// 👉 Replace SITE_KEY with actual key from Firebase Console > App Check
+export const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("6Le9t60rAAAAAGLmZNR4AnFasqKJKF7F2MJTOxuB"),
+  isTokenAutoRefreshEnabled: true, // keeps token fresh
+});

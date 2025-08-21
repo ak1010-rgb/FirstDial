@@ -4,8 +4,8 @@ export const providers = [
   // Skilled Services
   { id: 1, name: "Ramesh Kumar", service: "Electrician", location: "Delhi", rating: 4.2, experience: "5 years" },
   { id: 2, name: "Vinita Devi", service: "Electrician", location: "Noida", rating: 4.5, experience: "3 years" },
-  { id: 3, name: "Arun Mehta", service: "Motor Mechanic", location: "Gurgaon", rating: 4.1, experience: "6 years" },
-  { id: 4, name: "Shivam Chauhan", service: "Motor Mechanic", location: "Faridabad", rating: 3.9, experience: "4 years" },
+  { id: 3, name: "Arun Mehta", service: "Automobile Mechanic", location: "Gurgaon", rating: 4.1, experience: "6 years" },
+  { id: 4, name: "Shivam Chauhan", service: "Automobile Mechanic", location: "Faridabad", rating: 3.9, experience: "4 years" },
   { id: 5, name: "Priya Singh", service: "Electronic Services", location: "Delhi", rating: 4.6, experience: "5 years" },
   { id: 6, name: "Ravi Bhatia", service: "Electronic Services", location: "Noida", rating: 4.0, experience: "2 years" },
   { id: 7, name: "Amit Patel", service: "Tutor", location: "Faridabad", rating: 4.8, experience: "2 years" },
