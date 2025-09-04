@@ -109,7 +109,7 @@ Then push the project to GitHub and import it into [Vercel](https://vercel.com/)
 ## 📜 License
 
 This project is for learning and practice purposes.
-Feel free to fork and modify.
+Feel free to drop suggestions
 
 ---
 
